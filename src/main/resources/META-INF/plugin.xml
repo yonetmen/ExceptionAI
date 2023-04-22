@@ -1,0 +1,59 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.ksmgl.exceptionai</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>ExceptionAI</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="kasimgul@hotmail.com" url="https://twitter.com/kasimgul">KasimGul</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    <h1>ExceptionAI Plugin Documentation</h1>
+  <p>This plugin is free to use and helps Java developers to find alternative solutions to exceptions that are thrown in their Java applications.
+  The plugin analyzes the stack trace output in the console and suggests possible solutions based on machine learning models.</p>
+  <h2>Configuration</h2>
+  <p>Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:</p>
+  <ol>
+    <li>Click on <b>File > Settings > ExceptionAI Settings</b>.</li>
+    <li>In the <b>API Key</b> field, enter your OpenAI API key.</li>
+    <li>In the <b>Model</b> field, select the machine learning model you want to use.</li>
+    <li>You can modify other settings if you don't want to use default settings.</li>
+    <li>Click on the <b>Apply</b> button to save your changes.</li>
+  </ol>
+  <h2>Usage</h2>
+  <p>Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are
+   thrown in your Java applications. To use the plugin, follow these steps:</p>
+  <ol>
+    <li>Run your Java application in the IntelliJ IDEA IDE.</li>
+    <li>If an exception is thrown, look for the exception message in the console.</li>
+    <li>Click on the exception message in the console.</li>
+    <li>A pop-up window will appear with alternative solutions to the exception.</li>
+  </ol>
+  <p>Note that in order for the plugin to suggest solutions, you need to have an internet connection to access the OpenAI API.</p>
+  <h2>Conclusion</h2>
+  <p>Congratulations! You now know how to configure, and use the ExceptionAI plugin. Happy coding!</p>
+  <h2>Donations</h2>
+  <p>If you find the ExceptionAI Plugin useful, you can support the developer by making a donation using PayPal.
+   Donations help to support the ongoing development of the plugin and are greatly appreciated.</p>
+   <p>Use my <a href="https://www.paypal.com/donate/?business=Z8BCRWQ99B99S&no_recurring=0&item_name=Donations+help+to+support+the+ongoing+development+of+the+ExceptionAI+plugin.&currency_code=USD">PayPal link</a> to send your donations.</p>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <consoleFilterProvider implementation="com.ksmgl.exceptionai.filter.ExceptionFilter" />
+        <projectConfigurable instance="com.ksmgl.exceptionai.config.ExceptionAIConfigurable" displayName="ExceptionAI Settings" />
+    </extensions>
+
+</idea-plugin>
