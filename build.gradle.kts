@@ -12,22 +12,17 @@ repositories {
 
 intellij {
     version.set("2022.1.4")
-    type.set("IC") // Target IDE Platform
+    type.set("IC")
 
     plugins.set(listOf(/* Plugin Dependencies */))
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.9.2")
-
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.google.code.gson:gson:2.10.1")
 }
 
 tasks {
-    // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "11"
         targetCompatibility = "11"
@@ -47,6 +42,7 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
+
 }
 
 tasks.jar {
@@ -57,12 +53,15 @@ tasks.jar {
                 "Implementation-Vendor" to "Kasim Gul"
         )
     }
-    from("src/main/resources") {
-        include("META-INF/plugin.xml")
-    }
-}
 
+    from({configurations.runtimeClasspath.get().filter {it.name.endsWith("jar") }.map {zipTree(it)} })
 
-tasks.test {
-    useJUnitPlatform()
+    exclude("META-INF/*.kotlin_module")
+    exclude("META-INF/*.DSA")
+    exclude("META-INF/*.SF")
+    exclude("META-INF/*.RSA")
+    exclude("META-INF/*.MF")
+    exclude("META-INF/versions/9/module-info.class")
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
