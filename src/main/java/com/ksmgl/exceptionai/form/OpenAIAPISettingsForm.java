@@ -13,8 +13,6 @@ public class OpenAIAPISettingsForm {
   private JLabel modelLabel;
   private JTextField maxTokensTextField;
   private JLabel maxTokenLabel;
-  private JTextField nTextField;
-  private JLabel nLabel;
   private JTextField tempTextField;
   private JLabel tempLabel;
 
@@ -34,10 +32,6 @@ public class OpenAIAPISettingsForm {
     return maxTokensTextField.getText();
   }
 
-  public String getN() {
-    return nTextField.getText();
-  }
-
   public String getTemperature() {
     return tempTextField.getText();
   }
@@ -52,10 +46,6 @@ public class OpenAIAPISettingsForm {
 
   public void setMaxTokens(String maxTokens) {
     maxTokensTextField.setText(maxTokens);
-  }
-
-  public void setN(String n) {
-    nTextField.setText(n);
   }
 
   public void setTemperature(String temperature) {

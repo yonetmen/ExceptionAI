@@ -9,10 +9,10 @@ import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.ui.JBColor;
-import com.ksmgl.exceptionai.client.OpenAIClient;
-import com.ksmgl.exceptionai.config.OpenAIAPISettings;
+import com.ksmgl.exceptionai.api.APIResponse;
+import com.ksmgl.exceptionai.api.OpenAIClient;
 import com.ksmgl.exceptionai.config.ExceptionAIConfigurable;
-import org.apache.commons.lang.StringUtils;
+import com.ksmgl.exceptionai.config.OpenAIAPISettings;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -40,9 +40,15 @@ public class ExceptionFilter implements ConsoleFilterProvider {
               if (!settings.isConfigured()) {
                 showMissingApiKeyAlert(p);
               } else {
-                openAiClient = new OpenAIClient(settings.getApiKey(), settings.getModel(), settings.getTemperature());
-                String suggestion = openAiClient.getSuggestions(exception, message);
-                showSuggestion(p, suggestion);
+                System.out.println(settings);
+                openAiClient = new OpenAIClient(
+                    settings.getApiKey(),
+                    settings.getModel(),
+                    settings.getTemperature(),
+                    settings.getMaxTokens()
+                );
+                APIResponse apiResponse = openAiClient.getSuggestions(exception, message);
+                showSuggestion(p, apiResponse);
               }
             };
             return new Filter.Result(0, entireLength, hyperlinkInfo,
@@ -66,18 +72,21 @@ public class ExceptionFilter implements ConsoleFilterProvider {
     ShowSettingsUtil.getInstance().showSettingsDialog(project, ExceptionAIConfigurable.class);
   }
 
-  private void showSuggestion(Project project, String suggestion) {
+  private void showSuggestion(Project project, APIResponse apiResponse) {
     try {
       ApplicationManager.getApplication().invokeLater(() -> {
-        if (StringUtils.isBlank(suggestion)) {
-          String invalidKey = "\nPlease make sure that your API Key and other settings are correct.\n\n" +
-              "To update your API Key and/or other settings:\n\n" +
-              "Go to \"File > Settings > ExceptionAI Settings\" \n\n" +
-              "If you are not sure how to configure these settings please follow the link below. \n\n" +
-              "https://platform.openai.com/docs/api-reference/completions/create";
-          Messages.showMessageDialog(project, invalidKey, "ExceptionAI Configuration Error", Messages.getErrorIcon());
+        if (apiResponse.getCode() == 200) {
+          Messages.showMessageDialog(
+              project,
+              "\n" + apiResponse.getMessage(),
+              "ExceptionAI Suggestions",
+              Messages.getInformationIcon());
         } else {
-          Messages.showMessageDialog(project, "\n"+suggestion, "ExceptionAI Suggestions", Messages.getInformationIcon());
+          Messages.showMessageDialog(
+              project,
+              apiResponse.getMessage(),
+              "ExceptionAI Configuration Error",
+              Messages.getErrorIcon());
         }
       });
     } catch (Throwable t) {

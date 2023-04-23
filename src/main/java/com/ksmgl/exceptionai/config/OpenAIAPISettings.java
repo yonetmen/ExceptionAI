@@ -14,9 +14,8 @@ public class OpenAIAPISettings {
   }
 
   private String apiKey = "";
-  private String model = "";
-  private int maxTokens = 50;
-  private int n = 1;
+  private String model = "gpt-3.5-turbo";
+  private int maxTokens = 500;
   private double temperature = 1;
 
   public boolean isConfigured() {
@@ -47,14 +46,6 @@ public class OpenAIAPISettings {
     this.maxTokens = maxTokens;
   }
 
-  public int getN() {
-    return n;
-  }
-
-  public void setN(int n) {
-    this.n = n;
-  }
-
   public double getTemperature() {
     return temperature;
   }
@@ -62,4 +53,5 @@ public class OpenAIAPISettings {
   public void setTemperature(double temperature) {
     this.temperature = temperature;
   }
+
 }

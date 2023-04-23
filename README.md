@@ -3,11 +3,14 @@ This plugin is free to use and helps Java developers to find alternative solutio
 
 # Configuration
 Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:
-* Click on <b>File > Settings > ExceptionAI Settings.
-* In the <b>API Key</b> field, enter your OpenAI API key.
-* In the <b>Model</b> field, select the machine learning model you want to use.
-* You can modify other settings if you don't want to use default settings.
-* Click on the <b>Apply</b> button to save your changes.
+* Click on <b>File > Settings > ExceptionAI Settings.</b>
+* In the <b>API Key</b> field, enter your OpenAI API key. (Required)
+* In the <b>Model</b> field, select the Model you want to use. See the documentation about how to list available Models: https://platform.openai.com/docs/api-reference/models/list (Required)
+* In the <b>Max Tokens</b> field, you can choose the maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. Default is set to <b>500</b> and minimum allowed value in this plugin is <b>100</b>. If your answers are not completed, you might want to increase this value.
+* In the <b>Temperature</b> field, you can choose what sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
+* Click on the <b>Apply</b> button to save your changes. Default value is set to <b>1.0</b>
+
+You can check OpenAI documentation to find out more: https://platform.openai.com/docs/api-reference/chat
 
 # Usage
 Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are thrown in your Java applications. To use the plugin, follow these steps:</p>
