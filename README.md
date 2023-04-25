@@ -35,6 +35,6 @@ If you encounter any issues, have a feature request, or any questions about our 
 
 * <b>Email:</b> You can send an email to support@example.com with a detailed description of your issue, request, or question. Our team will get back to you as soon as possible.
 
-* <b>GitHub:</b> You can also submit an issue or request on our GitHub repository at https://github.com/yourusername/plugin-repo. This is an excellent way to track the progress of your request and engage in discussions with our development team and other users. We encourage you to search the existing issues to see if someone else has already submitted a similar request or encountered the same problem before creating a new one.
+* <b>GitHub:</b> You can also submit an issue or request on our GitHub repository at https://github.com/yonetmen/ExceptionAI. This is an excellent way to track the progress of your request and engage in discussions with our development team and other users. We encourage you to search the existing issues to see if someone else has already submitted a similar request or encountered the same problem before creating a new one.
 
 Your feedback and suggestions are invaluable to us, and we are committed to providing exceptional support and continuously improving our plugin. Thank you for choosing our plugin, and we look forward to helping you make the most of it!
