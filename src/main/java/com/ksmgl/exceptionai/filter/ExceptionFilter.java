@@ -40,7 +40,6 @@ public class ExceptionFilter implements ConsoleFilterProvider {
               if (!settings.isConfigured()) {
                 showMissingApiKeyAlert(p);
               } else {
-                System.out.println(settings);
                 openAiClient = new OpenAIClient(
                     settings.getApiKey(),
                     settings.getModel(),
@@ -85,7 +84,7 @@ public class ExceptionFilter implements ConsoleFilterProvider {
           Messages.showMessageDialog(
               project,
               apiResponse.getMessage(),
-              "ExceptionAI Configuration Error",
+              String.format("%d ExceptionAI Error", apiResponse.getCode()),
               Messages.getErrorIcon());
         }
       });

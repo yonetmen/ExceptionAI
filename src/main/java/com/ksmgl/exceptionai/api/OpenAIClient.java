@@ -68,12 +68,14 @@ public class OpenAIClient {
         }
       } else if (response.code() == 401) {
         return new APIResponse(401, AUTH_ERROR);
+      } else if (response.code() == 404) {
+        return new APIResponse(404, INVALID_MODEL_REQUEST_ERROR);
       } else if (response.code() == 429) {
         return new APIResponse(429, INSUFFICIENT_QUOTA);
       } else if (response.code() == 400) {
         return new APIResponse(400, INVALID_REQUEST_ERROR);
       } else if (response.code() == 500) {
-        return new APIResponse(500, INVALID_REQUEST_ERROR);
+        return new APIResponse(500, INTERNAL_SERVER_ERROR);
       }
     } catch (IOException e) {
       return new APIResponse(500, INTERNAL_SERVER_ERROR);

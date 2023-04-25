@@ -1,8 +1,8 @@
 package com.ksmgl.exceptionai.form;
 
 import com.intellij.openapi.ui.DialogWrapper;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.swing.*;
 
 public class OpenAIAPISettingsForm {

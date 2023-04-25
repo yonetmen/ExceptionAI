@@ -1,11 +1,11 @@
 # ExceptionAI Plugin Documentation
-This plugin is free to use and helps Java developers to find alternative solutions to exceptions that are thrown in their Java applications. The plugin analyzes the stack trace output in the console and suggests possible solutions based on machine learning models.
+This plugin is free to use and helps Java developers to find alternative solutions to exceptions that are thrown in their Java applications. The plugin analyzes the stack trace output in the console and suggests possible solutions based on language models.
 
 # Configuration
 Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:
 * Click on <b>File > Settings > ExceptionAI Settings.</b>
 * In the <b>API Key</b> field, enter your OpenAI API key. (Required)
-* In the <b>Model</b> field, select the Model you want to use. See the documentation about how to list available Models: https://platform.openai.com/docs/api-reference/models/list (Required)
+* In the <b>Model</b> field, select the Model you want to use. See the documentation about the Models: https://platform.openai.com/docs/api-reference/models/list (Required)
 * In the <b>Max Tokens</b> field, you can choose the maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. Default is set to <b>500</b> and minimum allowed value in this plugin is <b>100</b>. If your answers are not completed, you might want to increase this value.
 * In the <b>Temperature</b> field, you can choose what sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
 * Click on the <b>Apply</b> button to save your changes. Default value is set to <b>1.0</b>
@@ -26,5 +26,15 @@ Congratulations! You now know how to configure, and use the ExceptionAI plugin. 
   
 # Donations
 If you find the ExceptionAI Plugin useful, you can support the developer by making a donation using PayPal.
-Donations help to support the ongoing development of the plugin and are greatly appreciated.
+I have decided to donate all the money received through donations for this plugin to support the victims and their families after devastating earthquake in Turkey.
 Use my <a href="https://www.paypal.com/donate/?business=Z8BCRWQ99B99S&no_recurring=0&item_name=Donations+help+to+support+the+ongoing+development+of+the+ExceptionAI+plugin.&currency_code=USD">PayPal link</a> to send your donations.
+
+# Support
+
+If you encounter any issues, have a feature request, or any questions about our plugin, we are here to help! Please feel free to reach out to us through the following channels:
+
+* <b>Email:</b> You can send an email to support@example.com with a detailed description of your issue, request, or question. Our team will get back to you as soon as possible.
+
+* <b>GitHub:</b> You can also submit an issue or request on our GitHub repository at https://github.com/yourusername/plugin-repo. This is an excellent way to track the progress of your request and engage in discussions with our development team and other users. We encourage you to search the existing issues to see if someone else has already submitted a similar request or encountered the same problem before creating a new one.
+
+Your feedback and suggestions are invaluable to us, and we are committed to providing exceptional support and continuously improving our plugin. Thank you for choosing our plugin, and we look forward to helping you make the most of it!

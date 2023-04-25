@@ -1,10 +1,10 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.10.1"
+    id("org.jetbrains.intellij") version "1.13.3"
 }
 
 group = "com.ksmgl"
-version = "1.0.2"
+version = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -42,26 +42,4 @@ tasks {
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
     }
-
-}
-
-tasks.jar {
-    manifest {
-        attributes(
-                "Plugin-Version" to project.version,
-                "Plugin-Vendor" to "Kasim Gul",
-                "Implementation-Vendor" to "Kasim Gul"
-        )
-    }
-
-    from({configurations.runtimeClasspath.get().filter {it.name.endsWith("jar") }.map {zipTree(it)} })
-
-    exclude("META-INF/*.kotlin_module")
-    exclude("META-INF/*.DSA")
-    exclude("META-INF/*.SF")
-    exclude("META-INF/*.RSA")
-    exclude("META-INF/*.MF")
-    exclude("META-INF/versions/9/module-info.class")
-
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

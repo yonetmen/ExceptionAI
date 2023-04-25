@@ -23,9 +23,14 @@ public final class ApiErrors {
           "See documentation: https://platform.openai.com/docs/api-reference/chat \n" +
           "See github for simplified guidance: https://github.com/yonetmen/ExceptionAI";
 
+  public static final String INVALID_MODEL_REQUEST_ERROR =
+      "\nThe Model you want to use is not currently supported. " +
+          "If you don't know which model to choose, try 'gpt-3.5-turbo'.\n" +
+          "See documentation: https://platform.openai.com/docs/api-reference/models \n";
+
   public static final String INTERNAL_SERVER_ERROR =
       "\nOpenAI API server had an error while processing your request.\n" +
           "Retry your request after a brief wait to see if the issue persists.\n" +
-          "Check OpenAI status page: https://status.openai.com/";
+          "You can check OpenAI status page here: https://status.openai.com/";
 
 }

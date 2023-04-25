@@ -16,33 +16,46 @@
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
     <h1>ExceptionAI Plugin Documentation</h1>
-  <p>This plugin is free to use and helps Java developers to find alternative solutions to exceptions that are thrown in their Java applications.
-  The plugin analyzes the stack trace output in the console and suggests possible solutions based on machine learning models.</p>
-  <h2>Configuration</h2>
-  <p>Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:</p>
-  <ol>
-    <li>Click on <b>File > Settings > ExceptionAI Settings</b>.</li>
-    <li>In the <b>API Key</b> field, enter your OpenAI API key.</li>
-    <li>In the <b>Model</b> field, select the machine learning model you want to use.</li>
-    <li>You can modify other settings if you don't want to use default settings.</li>
-    <li>Click on the <b>Apply</b> button to save your changes.</li>
-  </ol>
-  <h2>Usage</h2>
-  <p>Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are
-   thrown in your Java applications. To use the plugin, follow these steps:</p>
-  <ol>
-    <li>Run your Java application in the IntelliJ IDEA IDE.</li>
-    <li>If an exception is thrown, look for the exception message in the console.</li>
-    <li>Click on the exception message in the console.</li>
-    <li>A pop-up window will appear with alternative solutions to the exception.</li>
-  </ol>
-  <p>Note that in order for the plugin to suggest solutions, you need to have an internet connection to access the OpenAI API.</p>
-  <h2>Conclusion</h2>
-  <p>Congratulations! You now know how to configure, and use the ExceptionAI plugin. Happy coding!</p>
-  <h2>Donations</h2>
-  <p>If you find the ExceptionAI Plugin useful, you can support the developer by making a donation using PayPal.
-   Donations help to support the ongoing development of the plugin and are greatly appreciated.</p>
-   <p>Use my <a href="https://www.paypal.com/donate/?business=Z8BCRWQ99B99S&no_recurring=0&item_name=Donations+help+to+support+the+ongoing+development+of+the+ExceptionAI+plugin.&currency_code=USD">PayPal link</a> to send your donations.</p>
+    <p>This plugin is free to use and helps Java developers to find alternative solutions to exceptions that are thrown in their Java applications. The plugin analyzes the stack trace output in the console and suggests possible solutions based on language models.</p>
+
+    <h2>Configuration</h2>
+    <p>Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:</p>
+    <ol>
+        <li>Click on <b>File > Settings > ExceptionAI Settings</b>.</li>
+        <li>In the <b>API Key</b> field, enter your OpenAI API key.</li>
+        <li>In the <b>Model</b> field, select the Model you want to use. See the documentation about the Models: https://platform.openai.com/docs/api-reference/models/list (Required)</li>
+        <li>In the <b>Max Tokens</b> field, you can choose the maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. Default is set to <b>500</b> and minimum allowed value in this plugin is <b>100</b>. If your answers are not completed, you might want to increase this value.</li>
+        <li>In the <b>Temperature</b> field, you can choose what sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.</li>
+        <li>Click on the <b>Apply</b> button to save your changes.</li>
+    </ol>
+
+    <p>You can check OpenAI documentation to find out more: https://platform.openai.com/docs/api-reference/chat</p>
+
+    <h2>Usage</h2>
+    <p>Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are thrown in your Java applications. To use the plugin, follow these steps:</p>
+    <ol>
+        <li>Run your Java application in the IntelliJ IDEA IDE.</li>
+        <li>If an exception is thrown, look for the exception message in the console.</li>
+        <li>Click on the exception message in the console.</li>
+        <li>A pop-up window will appear with alternative solutions to the exception.</li>
+    </ol>
+    <p>Note that in order for the plugin to suggest solutions, you need to have an internet connection to access the OpenAI API.</p>
+
+    <h2>Conclusion</h2>
+    <p>Congratulations! You now know how to configure, and use the ExceptionAI plugin. Happy coding!</p>
+
+    <h2>Donations</h2>
+    <p>If you find the ExceptionAI Plugin useful, you can support the developer by making a donation using PayPal.</p>
+    <p>I have decided to donate all the money received through donations for this plugin to support the victims and their families after devastating earthquake in Turkey.</p>
+    <p>Use my <a href="https://www.paypal.com/donate/?business=Z8BCRWQ99B99S&no_recurring=0&item_name=Donations+help+to+support+the+ongoing+development+of+the+ExceptionAI+plugin.&currency_code=USD">PayPal link</a> to send your donations.</p>
+
+    <h2>Support</h2>
+    <p>If you encounter any issues, have a feature request, or any questions about our plugin, we are here to help! Please feel free to reach out to us through the following channels:</p>
+    <ol>
+        <li><b>Email:</b> You can send an email to <b>kasimgul@gmail.com</b> with a detailed description of your issue, request, or question. Our team will get back to you as soon as possible.</li>
+        <li><b>GitHub:</b> You can also submit an issue or request on our GitHub repository at <b>https://github.com/yonetmen/ExceptionAI</b> This is an excellent way to track the progress of your request and engage in discussions with the Developer and other users. I encourage you to search the existing issues to see if someone else has already submitted a similar request or encountered the same problem before creating a new one.</li>
+    </ol>
+    <p>Your feedback and suggestions are invaluable to me, and I am committed to providing good support and continuously improving this plugin. Thank you for choosing my plugin, and I look forward to helping you make the most of it!</p>
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
