@@ -34,10 +34,12 @@
     <h2>Usage</h2>
     <p>Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are thrown in your Java applications. To use the plugin, follow these steps:</p>
     <ol>
+        <li>Activate ExceptionAI Plugin from <b>Tools</b> menu.</li>
         <li>Run your Java application in the IntelliJ IDEA IDE.</li>
         <li>If an exception is thrown, look for the exception message in the console.</li>
         <li>Click on the exception message in the console.</li>
         <li>A pop-up window will appear with alternative solutions to the exception.</li>
+        <li>You can easily toggle the plugin from the <b>Tools</b> menu if you want to navigate through the stack trace without triggering the ExceptionAI suggestion function. To make the <i>"Toggle"</i> function work, you'll need to run your application again, so it throws an exception.</li>
     </ol>
     <p>Note that in order for the plugin to suggest solutions, you need to have an internet connection to access the OpenAI API.</p>
 
@@ -65,8 +67,14 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <consoleFilterProvider implementation="com.ksmgl.exceptionai.filter.ExceptionFilter" />
-        <projectConfigurable instance="com.ksmgl.exceptionai.config.ExceptionAIConfigurable" displayName="ExceptionAI Settings" />
+        <consoleFilterProvider implementation="com.ksmgl.exceptionai.filter.ExceptionFilter"/>
+        <projectConfigurable instance="com.ksmgl.exceptionai.config.ExceptionAIConfigurable" displayName="ExceptionAI Settings"/>
     </extensions>
+
+    <actions>
+        <action id="ExceptionAIToggleAction" class="com.ksmgl.exceptionai.action.PluginToggleAction">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
 
 </idea-plugin>

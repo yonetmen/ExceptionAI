@@ -9,6 +9,7 @@ import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.ui.JBColor;
+import com.ksmgl.exceptionai.action.PluginToggleAction;
 import com.ksmgl.exceptionai.api.APIResponse;
 import com.ksmgl.exceptionai.api.OpenAIClient;
 import com.ksmgl.exceptionai.config.ExceptionAIConfigurable;
@@ -28,10 +29,10 @@ public class ExceptionFilter implements ConsoleFilterProvider {
   @NotNull
   @Override
   public Filter[] getDefaultFilters(@NotNull Project project) {
-    return new Filter[]{
+    return new Filter[] {
         (line, entireLength) -> {
           Matcher matcher = EXCEPTION_PATTERN.matcher(line);
-          if (matcher.find()) {
+          if (PluginToggleAction.isEnabled() && matcher.find()) {
             String exception = matcher.group("exception");
             String message = matcher.group("message");
 

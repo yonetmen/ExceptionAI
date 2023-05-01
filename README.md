@@ -3,7 +3,7 @@ This plugin is free to use and helps Java developers to find alternative solutio
 
 # Configuration
 Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:
-* Click on <b>File > Settings > ExceptionAI Settings.</b>
+* Click on **File > Settings > ExceptionAI Settings**</b>
 * In the <b>API Key</b> field, enter your OpenAI API key. (Required)
 * In the <b>Model</b> field, select the Model you want to use. See the documentation about the Models: https://platform.openai.com/docs/api-reference/models/list (Required)
 * In the <b>Max Tokens</b> field, you can choose the maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. Default is set to <b>500</b> and minimum allowed value in this plugin is <b>100</b>. If your answers are not completed, you might want to increase this value.
@@ -14,10 +14,12 @@ You can check OpenAI documentation to find out more: https://platform.openai.com
 
 # Usage
 Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are thrown in your Java applications. To use the plugin, follow these steps:</p>
+* Activate ExceptionAI Plugin from **Tools** menu.
 * Run your Java application in the IntelliJ IDEA IDE.
 * If an exception is thrown, look for the exception message in the console.
 * Click on the exception message in the console.
 * A pop-up window will appear with alternative solutions to the exception.
+* You can easily toggle the plugin from the **Tools** menu if you want to navigate through the stack trace without triggering the ExceptionAI suggestion function. To make the *"Toggle"* function work, you'll need to run your application again, so it throws an exception.
 
 Note that in order for the plugin to suggest solutions, you need to have an internet connection to access the OpenAI API.
 
