@@ -27,74 +27,61 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CodeEditorAction {
-  private static final Map<Pair<String, Integer>, RangeHighlighter> highlighters = new HashMap<>();
 
-  public void highlightExceptionSourceLine(@NotNull Project project, String line) {
-    clearAllHighlights();
-    Pattern pattern = Pattern.compile("at ([a-zA-Z0-9_$.]+)\\.([a-zA-Z0-9_$]+)\\(([A-Za-z0-9-_$.]+\\.java):(\\d+)\\)");
-    Matcher sourceClassMatcher = pattern.matcher(line);
+  private static final Map<Pair<String, Integer>, RangeHighlighter> HIGHLIGHTERS = new HashMap<>();
+  private static final JBColor HIGHLIGHT_COLOR =
+      new JBColor(new Color(33, 66, 131, 255), new Color(33, 66, 131, 255));
+  private static final TextAttributes HIGHLIGHT_ATTRIBUTES =
+      new TextAttributes(null, HIGHLIGHT_COLOR, null, null, 0);
+
+  public void handleExceptionTrace(@NotNull Project project, String line, Pattern pattern) {
+    Matcher matcher = pattern.matcher(line);
     if (PluginToggleAction.isEnabled()) {
       ApplicationManager.getApplication().runReadAction(() -> {
-        while (sourceClassMatcher.find()) {
-          String matchedClassName = sourceClassMatcher.group(1);
-          int matchedLineNumber = Integer.parseInt(sourceClassMatcher.group(4));
+        while (matcher.find()) {
+          String className = matcher.group(1);
+          int lineNumber;
+          try {
+            lineNumber = Integer.parseInt(matcher.group(4));
+          } catch (NumberFormatException e) {
+            continue;
+          }
 
-          // Check if the class belongs to the current project
-          PsiClass psiClass = JavaPsiFacade.getInstance(project).findClass(matchedClassName, GlobalSearchScope.projectScope(project));
-
+          PsiClass psiClass = getClassFromProject(project, className);
           if (psiClass != null) {
-            // Check if the file is in the project's source root
-            VirtualFile classFile = psiClass.getContainingFile().getVirtualFile();
-            boolean isInSourceRoot = ProjectRootManager.getInstance(project).getFileIndex().isInSourceContent(classFile);
-            if (isInSourceRoot) {
-              navigateToAndHighlightLine(project, psiClass, matchedLineNumber);
-              break;
-            }
+            navigateAndHighlightLine(project, psiClass, lineNumber);
           }
         }
       });
     }
   }
 
-  private void navigateToAndHighlightLine(Project project, PsiClass psiClass, int lineNumber) {
+  private PsiClass getClassFromProject(Project project, String className) {
+    PsiClass psiClass = JavaPsiFacade.getInstance(project)
+        .findClass(className, GlobalSearchScope.projectScope(project));
+    if (psiClass != null) {
+      VirtualFile classFile = psiClass.getContainingFile().getVirtualFile();
+      boolean isInSourceRoot = ProjectRootManager.getInstance(project)
+          .getFileIndex().isInSourceContent(classFile);
+      if (isInSourceRoot) {
+        return psiClass;
+      }
+    }
+    return null;
+  }
+
+  private void navigateAndHighlightLine(Project project, PsiClass psiClass, int lineNumber) {
     PsiFile psiFile = psiClass.getContainingFile();
     if (psiFile != null) {
       VirtualFile virtualFile = psiFile.getVirtualFile();
       if (virtualFile != null) {
-        // Navigate to the specified line number
         OpenFileDescriptor descriptor = new OpenFileDescriptor(project, virtualFile, lineNumber - 1);
         ApplicationManager.getApplication().invokeLater(() -> {
           if (descriptor.canNavigate()) {
             descriptor.navigate(true);
             final Editor editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
             if (editor != null) {
-              Runnable[] command = new Runnable[1];
-              command[0] = () -> {
-                if (editor.getCaretModel().getOffset() == descriptor.getOffset()) {
-                  editor.getSelectionModel().selectLineAtCaret();
-                  // Get the document and markup model for the editor
-                  Document document = editor.getDocument();
-
-                  // Get the start and end offsets for the line
-                  int lineStartOffset = document.getLineStartOffset(lineNumber - 1);
-                  int lineEndOffset = document.getLineEndOffset(lineNumber - 1);
-
-                  // Create the text attributes (e.g., with a yellow background)
-                  JBColor semiTransparentYellow = new JBColor(new Color(33, 66, 131, 255), new Color(33, 66, 131, 255));
-                  TextAttributes attributes = new TextAttributes(null, semiTransparentYellow, null, null, 0);
-
-                  Pair<String, Integer> key = new Pair<>(psiClass.getQualifiedName(), lineNumber);
-                  RangeHighlighter existingHighlighter = highlighters.get(key);
-                  if (existingHighlighter == null || !existingHighlighter.isValid()) {
-                    RangeHighlighter highlighter = editor.getMarkupModel().addRangeHighlighter(lineStartOffset, lineEndOffset, HighlighterLayer.ERROR, attributes, HighlighterTargetArea.LINES_IN_RANGE);
-                    highlighters.put(key, highlighter);
-                  }
-                } else {
-                  editor.getCaretModel().moveToOffset(descriptor.getOffset());
-                  ApplicationManager.getApplication().invokeLater(command[0]);
-                }
-              };
-              command[0].run();
+              highlightLineInEditor(editor, descriptor, psiClass, lineNumber);
             }
           }
         });
@@ -102,13 +89,45 @@ public class CodeEditorAction {
     }
   }
 
-  public void clearAllHighlights() {
-    ApplicationManager.getApplication().invokeLater(() -> {
-      for (Map.Entry<Pair<String, Integer>, RangeHighlighter> entry : highlighters.entrySet()) {
-        entry.getValue().dispose();
+  private void highlightLineInEditor(
+      Editor editor,
+      OpenFileDescriptor descriptor,
+      PsiClass psiClass,
+      int lineNumber) {
+    Runnable[] command = new Runnable[1];
+    command[0] = () -> {
+      if (editor.getCaretModel().getOffset() == descriptor.getOffset()) {
+        editor.getSelectionModel().selectLineAtCaret();
+        Document document = editor.getDocument();
+        int lineStartOffset = document.getLineStartOffset(lineNumber - 1);
+        int lineEndOffset = document.getLineEndOffset(lineNumber - 1);
+
+        Pair<String, Integer> key = new Pair<>(psiClass.getQualifiedName(), lineNumber);
+        RangeHighlighter existingHighlighter = HIGHLIGHTERS.get(key);
+        if (existingHighlighter == null || !existingHighlighter.isValid()) {
+          RangeHighlighter highlighter = editor.getMarkupModel()
+              .addRangeHighlighter(
+                  lineStartOffset,
+                  lineEndOffset,
+                  HighlighterLayer.ERROR,
+                  HIGHLIGHT_ATTRIBUTES,
+                  HighlighterTargetArea.LINES_IN_RANGE);
+          HIGHLIGHTERS.put(key, highlighter);
+        }
+      } else {
+        editor.getCaretModel().moveToOffset(descriptor.getOffset());
+        ApplicationManager.getApplication().invokeLater(command[0]);
       }
-      highlighters.clear();
-    });
+    };
+    command[0].run();
   }
 
+  public void clearAllHighlights() {
+    ApplicationManager.getApplication().invokeLater(() -> {
+      for (Map.Entry<Pair<String, Integer>, RangeHighlighter> entry : HIGHLIGHTERS.entrySet()) {
+        entry.getValue().dispose();
+      }
+      HIGHLIGHTERS.clear();
+    });
+  }
 }

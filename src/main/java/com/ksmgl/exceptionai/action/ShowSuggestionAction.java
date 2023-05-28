@@ -24,7 +24,7 @@ public class ShowSuggestionAction {
   private OpenAIClient openAiClient;
 
   @Nullable
-  public Filter.Result extract(String line, int entireLength) {
+  public Filter.Result handleSuggestionEvent(String line, int entireLength) {
     // Show Suggestion
     final Pattern EXCEPTION_PATTERN = Pattern.compile("(?<exception>\\S+Exception): (?<message>.*)");
     Matcher matcher = EXCEPTION_PATTERN.matcher(line);
