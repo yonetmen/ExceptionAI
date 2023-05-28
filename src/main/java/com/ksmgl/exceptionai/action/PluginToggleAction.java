@@ -11,7 +11,7 @@ import static com.ksmgl.exceptionai.gui.icon.ToggleIcon.TOGGLE_OFF;
 import static com.ksmgl.exceptionai.gui.icon.ToggleIcon.TOGGLE_ON;
 
 public class PluginToggleAction extends AnAction implements Toggleable {
-  private static boolean isEnabled = false;
+  private static boolean isEnabled = true;
 
   public PluginToggleAction() {
     super("Toggle On ExceptionAI");

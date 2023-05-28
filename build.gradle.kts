@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.ksmgl"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ intellij {
     version.set("2022.1.4")
     type.set("IC")
 
-    plugins.set(listOf(/* Plugin Dependencies */))
+    plugins.set(listOf("java"))
 }
 
 dependencies {
