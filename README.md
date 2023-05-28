@@ -3,23 +3,23 @@ This plugin is free to use and helps Java developers to find alternative solutio
 
 # Configuration
 Before using the plugin, you need to configure it by setting your OpenAI API Key and Language Model. To configure the plugin, follow these steps:
-* Click on **File > Settings > ExceptionAI Settings**</b>
-* In the <b>API Key</b> field, enter your OpenAI API key. (Required)
-* In the <b>Model</b> field, select the Model you want to use. See the documentation about the Models: https://platform.openai.com/docs/api-reference/models/list (Required)
+* Click on **File > Settings > ExceptionAI Settings**</b> 
+* In the <b>API Key</b> field, enter your OpenAI API key. <small>(Required)</small> You can create a free account at https://platform.openai.com/signup and get <b>$5</b> free credits.
+* In the <b>Model</b> field, select the <b>Language Model</b> you want to use. <small>(Required)</small> See the documentation about the Models: https://platform.openai.com/docs/api-reference/models/list
 * In the <b>Max Tokens</b> field, you can choose the maximum number of tokens to generate in the chat completion. The total length of input tokens and generated tokens is limited by the model's context length. Default is set to <b>500</b> and minimum allowed value in this plugin is <b>100</b>. If your answers are not completed, you might want to increase this value.
-* In the <b>Temperature</b> field, you can choose what sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
-* Click on the <b>Apply</b> button to save your changes. Default value is set to <b>1.0</b>
+* In the <b>Temperature</b> field, you can choose what sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. Default value is set to <b>1.0</b>
+* Click on the <b>OK</b> button to save your changes.
 
 You can check OpenAI documentation to find out more: https://platform.openai.com/docs/api-reference/chat
 
 # Usage
 Once you have configured the plugin, you can start using it to find alternative solutions to Exceptions that are thrown in your Java applications. To use the plugin, follow these steps:</p>
-* Activate ExceptionAI Plugin from **Tools** menu.
 * Run your Java application in the IntelliJ IDEA IDE.
-* If an exception is thrown, look for the exception message in the console.
+* If an Exception is thrown, look for the exception message in the console.
 * Click on the exception message in the console.
-* A pop-up window will appear with alternative solutions to the exception.
-* You can easily toggle the plugin from the **Tools** menu if you want to navigate through the stack trace without triggering the ExceptionAI suggestion function. To make the *"Toggle"* function work, you'll need to run your application again, so it throws an exception.
+* The source Java file that caused the Exception will be opened in the Code Editor and the line will be highlighted.
+* A pop-up window will appear with alternative solutions to the Exception.
+* You can easily <b>Turn On</b> / <b>Turn Off</b> the plugin from the **Tools** menu if you want to navigate through the stack trace without triggering the ExceptionAI suggestion function. To make the *"Toggle"* function work, you'll need to re-run your application.
 
 Note that in order for the plugin to suggest solutions, you need to have an internet connection to access the OpenAI API.
 
