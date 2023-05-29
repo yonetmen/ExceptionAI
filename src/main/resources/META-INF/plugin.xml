@@ -9,7 +9,7 @@
     <name>ExceptionAI</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="kasimgul@hotmail.com" url="https://twitter.com/kasimgul">KasimGul</vendor>
+    <vendor email="yonetmen@gmail.com" url="https://twitter.com/kasimgul">Kasim Gul</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
@@ -52,12 +52,12 @@
     <p>Use my <a href="https://www.paypal.com/donate/?business=Z8BCRWQ99B99S&no_recurring=0&item_name=Donations+help+to+support+the+ongoing+development+of+the+ExceptionAI+plugin.&currency_code=USD">PayPal link</a> to send your donations.</p>
 
     <h2>Support</h2>
-    <p>If you encounter any issues, have a feature request, or any questions about our plugin, we are here to help! Please feel free to reach out to us through the following channels:</p>
+    <p>If you encounter any issues, have a feature request, or any questions about ExceptionAI plugin, I am here to help! Please feel free to reach out to me through the following channels:</p>
     <ol>
-        <li><b>Email:</b> You can send an email to <b>kasimgul@gmail.com</b> with a detailed description of your issue, request, or question. Our team will get back to you as soon as possible.</li>
-        <li><b>GitHub:</b> You can also submit an issue or request on our GitHub repository at <b>https://github.com/yonetmen/ExceptionAI</b> This is an excellent way to track the progress of your request and engage in discussions with the Developer and other users. I encourage you to search the existing issues to see if someone else has already submitted a similar request or encountered the same problem before creating a new one.</li>
+        <li><b>Email:</b> You can send an email to yonetmen@gmail.com with a detailed description of your issue, request, or question. I will try to get back to you as soon as possible.</li>
+        <li><b>GitHub:</b> You can also submit an issue or request on this GitHub repository at https://github.com/yonetmen/ExceptionAI. This is an excellent way to track the progress of your request and engage in discussions with the developer and other users. I encourage you to search the existing issues to see if someone else has already submitted a similar request or encountered the same problem before creating a new one.</li>
     </ol>
-    <p>Your feedback and suggestions are invaluable to me, and I am committed to providing good support and continuously improving this plugin. Thank you for choosing my plugin, and I look forward to helping you make the most of it!</p>
+    <p>Your feedback and suggestions are invaluable to me, and I am committed to providing support and continuously improving this plugin. Thank you for trying out ExceptionAI plugin!</p>
   ]]></description>
 
     <!-- Product and plugin compatibility requirements.
