@@ -36,20 +36,39 @@ public class ExceptionAIConfigurable implements SearchableConfigurable {
     return form.getMainPanel();
   }
 
-  @Override
   public boolean isModified() {
-    return !form.getApiKey().equals(settings.getApiKey())
-        || !form.getModel().equals(settings.getModel())
-        || !form.getMaxTokens().equals(String.valueOf(settings.getMaxTokens()))
-        || !form.getTemperature().equals(String.valueOf(settings.getTemperature()));
+    if (form != null) {
+      return !form.getApiKey().equals(settings.getApiKey())
+          || !form.getModel().equals(settings.getModel())
+          || !form.getMaxTokens().equals(String.valueOf(settings.getMaxTokens()))
+          || !form.getTemperature().equals(String.valueOf(settings.getTemperature()));
+    }
+    return false;
   }
 
   @Override
   public void apply() {
-    settings.setApiKey(form.getApiKey());
-    settings.setModel(form.getModel());
-    settings.setMaxTokens(getMaxTokensValue(form.getMaxTokens()));
-    settings.setTemperature(getMaxTemperatureValue(form.getTemperature()));
+    if (form != null) {
+      settings.setApiKey(form.getApiKey());
+      settings.setModel(form.getModel());
+      settings.setMaxTokens(getMaxTokensValue(form.getMaxTokens()));
+      settings.setTemperature(getMaxTemperatureValue(form.getTemperature()));
+    }
+  }
+
+  @Override
+  public void reset() {
+    if (form != null) {
+      form.setApiKey(settings.getApiKey());
+      form.setModel(settings.getModel());
+      form.setMaxTokens(String.valueOf(settings.getMaxTokens()));
+      form.setTemperature(String.valueOf(settings.getTemperature()));
+    }
+  }
+
+  @Override
+  public void disposeUIResources() {
+    form = null;
   }
 
   private double getMaxTemperatureValue(String temperature) {
@@ -71,18 +90,5 @@ public class ExceptionAIConfigurable implements SearchableConfigurable {
     } catch (Exception e) {
       return 100;
     }
-  }
-
-  @Override
-  public void reset() {
-    form.setApiKey(settings.getApiKey());
-    form.setMaxTokens(settings.getModel());
-    form.setMaxTokens(String.valueOf(settings.getMaxTokens()));
-    form.setTemperature(String.valueOf(settings.getTemperature()));
-  }
-
-  @Override
-  public void disposeUIResources() {
-    form = null;
   }
 }

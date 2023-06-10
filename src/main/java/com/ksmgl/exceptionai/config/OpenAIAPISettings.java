@@ -1,57 +1,80 @@
 package com.ksmgl.exceptionai.config;
 
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public class OpenAIAPISettings {
+@State(
+    name = "ExceptionAIConfig",
+    storages = {@Storage("ExceptionAIConfig.xml")}
+)
+public class OpenAIAPISettings implements PersistentStateComponent<OpenAIAPISettings.State> {
 
-  private static final OpenAIAPISettings instance = new OpenAIAPISettings();
+  private static final OpenAIAPISettings instance =
+      ApplicationManager.getApplication().getService(OpenAIAPISettings.class);
 
-  private OpenAIAPISettings() {
+  public static class State {
+    public String apiKey = "";
+    public String model = "gpt-3.5-turbo";
+    public int maxTokens = 500;
+    public double temperature = 1;
   }
+
+  private final State appState = new State();
 
   public static OpenAIAPISettings getInstance() {
     return instance;
   }
 
-  private String apiKey = "";
-  private String model = "gpt-3.5-turbo";
-  private int maxTokens = 500;
-  private double temperature = 1;
-
   public boolean isConfigured() {
-    return !StringUtils.isBlank(apiKey) && !StringUtils.isBlank(model);
+    return !StringUtils.isBlank(appState.apiKey) && !StringUtils.isBlank(appState.model);
   }
 
   public String getApiKey() {
-    return apiKey;
+    return appState.apiKey;
   }
 
   public void setApiKey(String apiKey) {
-    this.apiKey = apiKey;
+    appState.apiKey = apiKey;
   }
 
   public String getModel() {
-    return model;
+    return appState.model;
   }
 
   public void setModel(String model) {
-    this.model = model;
+    appState.model = model;
   }
 
   public int getMaxTokens() {
-    return maxTokens;
+    return appState.maxTokens;
   }
 
   public void setMaxTokens(int maxTokens) {
-    this.maxTokens = maxTokens;
+    appState.maxTokens = maxTokens;
   }
 
   public double getTemperature() {
-    return temperature;
+    return appState.temperature;
   }
 
   public void setTemperature(double temperature) {
-    this.temperature = temperature;
+    appState.temperature = temperature;
   }
 
+  @Nullable
+  @Override
+  public State getState() {
+    return appState;
+  }
+
+  @Override
+  public void loadState(@NotNull State state) {
+    XmlSerializerUtil.copyBean(state, appState);
+  }
 }

@@ -71,6 +71,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <consoleFilterProvider implementation="com.ksmgl.exceptionai.filter.ExceptionFilter"/>
         <projectConfigurable instance="com.ksmgl.exceptionai.config.ExceptionAIConfigurable" displayName="ExceptionAI Settings"/>
+        <applicationService serviceImplementation="com.ksmgl.exceptionai.config.OpenAIAPISettings"/>
     </extensions>
 
     <actions>
@@ -78,5 +79,6 @@
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>
+
 
 </idea-plugin>
